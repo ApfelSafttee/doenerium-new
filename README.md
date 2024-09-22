@@ -5,14 +5,8 @@
 # 👁‍🗨 HERE IS THE PROOF VIDEO
 https://github.com/user-attachments/assets/5548de2a-6983-4ae4-8d71-147277522670
 
-
 </h1>
 
-<p align="center"> 
-  <kbd>
-<img src="https://faint.sh/doener.jpg" width="328"></img>
-  </kbd>
-</p>
 
 
 <h1 align="center">
