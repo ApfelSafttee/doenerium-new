@@ -1,7 +1,8 @@
 <a id="top"></a>
 <h1 align="center">
-BE AWARE OF THIS REPO https://github.com/doenerium6969/doenerium-fixed . HES DUALHOOKING. HERE IS THE PROOF VIDEO
+⚠️BE AWARE OF USING THIS REPO https://github.com/doenerium6969/doenerium-fixed . HES DUALHOOKING
 
+# 👁‍🗨 HERE IS THE PROOF VIDEO
 https://github.com/user-attachments/assets/5548de2a-6983-4ae4-8d71-147277522670
 
 
