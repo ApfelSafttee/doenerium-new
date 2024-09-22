@@ -20,8 +20,6 @@ https://github.com/user-attachments/assets/5548de2a-6983-4ae4-8d71-147277522670
 
 - [📁 Setting up](#setup)
 - [⚔️ Features](#features)
-- [📸 Screenshots](#screenshot)
-- [📝 Todo](#todo)
 - [📜 License](#license)
 - [⚠️ Note](#note)
 
@@ -129,6 +127,8 @@ https://github.com/user-attachments/assets/5548de2a-6983-4ae4-8d71-147277522670
 > Sends all files to your discord webhook in beautiful embeds and a structured zip file
 >
 > Automatic obfuscation when building (12 sec to build exe | 30-40mb)
+
+<a id="license"></a>
 
 ---
 
