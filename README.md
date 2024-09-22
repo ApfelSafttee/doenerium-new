@@ -2,7 +2,10 @@
 <h1 align="center">
 BE AWARE OF THIS REPO https://github.com/doenerium6969/doenerium-fixed . HES DUALHOOKING. HERE IS THE PROOF VIDEO
 
-https://raw.githubusercontent.com/ApfelSafttee/doenerium-new/refs/heads/main/proof/doenerium_exposed.mp4?width=200
+<video width="320" height="240" controls>
+  <source src="https://raw.githubusercontent.com/ApfelSafttee/doenerium-new/refs/heads/main/proof/doenerium_exposed.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 
 </h1>
