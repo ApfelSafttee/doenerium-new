@@ -111,23 +111,6 @@ https://github.com/user-attachments/assets/5548de2a-6983-4ae4-8d71-147277522670
 > Epic Games Launcher Session stealer
 
 
-
-### 🏹 〢 Additional
-
-> Internet connection check every 3 seconds before it starts stealing
->
-> Ultra Obfuscation (use https://obfuscator.io)
->
-> Disable UAC / Anti-Debug / Anti-VM / Blue Screen if detect
->
-> No Traces and silent
->
-> Validates a found discord token and then sends it to your discord webhook
->
-> Sends all files to your discord webhook in beautiful embeds and a structured zip file
->
-> Automatic obfuscation when building (12 sec to build exe | 30-40mb)
-
 <a id="license"></a>
 
 ---
