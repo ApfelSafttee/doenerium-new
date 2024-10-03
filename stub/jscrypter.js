@@ -8,6 +8,7 @@ const inputFile = "./node_modules/input.js";
 
 const file = fs.readFileSync(inputFile, "utf-8");
 
+
 JsConfuser.obfuscate(file, {
   "compact": false, // Reduces the code to a compact form
   "controlFlowFlattening": 1, // Mixes the control flow to make the code harder to follow
