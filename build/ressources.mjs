@@ -4,6 +4,7 @@ import colors from 'colors';
 import { unlink, copyFile, rename } from 'fs/promises';
 import { exec } from 'child_process';
 
+
 // Get the directory of the currently running script
 const scriptDir = dirname(resolve('./ressources.mjs'));
 const iconDir = resolve(scriptDir, '..', 'icon');
