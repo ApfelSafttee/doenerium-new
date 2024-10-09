@@ -15,7 +15,6 @@ function getLocale() {
     return Intl.DateTimeFormat().resolvedOptions().locale.slice(0, 2).toUpperCase();
 }
 
-
 const computerName = os.hostname();
 const local = process.env.LOCALAPPDATA;
 const discords = [];
